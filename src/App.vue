@@ -31,8 +31,8 @@ export default {
     requestNews () {
       let self = this
       // this.$Loading()
-      this.testNewsService
-        .loadData({
+      this.testNewsService.token(false)
+        .request({
           
         })
         .then((data) => {

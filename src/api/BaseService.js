@@ -1,6 +1,6 @@
 import xhr from './xhr/fetch'
 import config from './xhr/config'
-export default class BaseService {
+class BaseService {
   constructor ({ paging = false, page = 1, pagesize = 20} = {}) {
     this._isPaging = paging
     this._page = page
@@ -12,7 +12,6 @@ export default class BaseService {
       client: config.client,
       version: config.version
     }
-
   }
 
   page (page) {
@@ -34,13 +33,12 @@ export default class BaseService {
     return this
   }
 
-  loadData (method, url, body) {
+  request (method, url, body) {
     let page = {}
     if (this._isPaging) {
       page.page = this._page
       page.pagesize = this._pagesize
     }
-
     let url_ = config.SERVER_API_PATH + '/' + url
     let method_ = method || 'GET'
 
@@ -52,3 +50,5 @@ export default class BaseService {
     })
   }
 }
+
+export default BaseService
