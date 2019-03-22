@@ -7,7 +7,7 @@ const validateModel = obey.model({
   timestamp: { type: 'number', required: true }
 })
 
-const response = (data) => {
+const validate = (data) => {
   return new Promise((resolve, reject) => {
     validateModel.validate(data)
     .then(data => {
@@ -24,4 +24,4 @@ const response = (data) => {
   })
 }
 
-export default response
+export default validate

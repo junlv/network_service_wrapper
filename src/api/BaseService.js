@@ -1,4 +1,5 @@
 import xhr from './xhr/fetch'
+import config from './xhr/config'
 export default class BaseService {
   constructor ({ paging = false, page = 1, pagesize = 20 } = {}) {
     this._isPaging = paging
@@ -26,13 +27,18 @@ export default class BaseService {
 
   loadData (method, url, body) {
     let page = {}
+
     if (this._isPaging) {
       page.page = this._page
       page.pagesize = this._pagesize
     }
+
+    let url_ = config.SERVER_API_PATH + '/' + url
+    let method_ = method || 'GET'
+
     return xhr({
-      method: method,
-      url: url,
+      method: method_,
+      url: url_,
       body: Object.assign(this.commonParam, body, page),
       expire: this._expire
     })
