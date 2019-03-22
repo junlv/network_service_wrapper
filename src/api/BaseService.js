@@ -1,33 +1,41 @@
 import xhr from './xhr/fetch'
 import config from './xhr/config'
 export default class BaseService {
-  constructor ({ paging = false, page = 1, pagesize = 20 } = {}) {
+  constructor ({ paging = false, page = 1, pagesize = 20} = {}) {
     this._isPaging = paging
     this._page = page
+    this._use_token = true
     this._pagesize = pagesize
     this._expire = 0
     this._cache = null
-    this.commonParam = {
+    this._commonParam = {
       client: config.client,
       version: config.version
     }
+
   }
 
-  setPage (page) {
+  page (page) {
     this._page = page
+    return this
+  }
+
+  token (_use_token) {
+    this._use_token = _use_token
+    return this
   }
 
   enablePaging () {
     this._isPaging = true
   }
 
-  setPageSize (pagesize) {
+  pageSize (pagesize) {
     this._pagesize = pagesize
+    return this
   }
 
   loadData (method, url, body) {
     let page = {}
-
     if (this._isPaging) {
       page.page = this._page
       page.pagesize = this._pagesize
@@ -39,7 +47,7 @@ export default class BaseService {
     return xhr({
       method: method_,
       url: url_,
-      body: Object.assign(this.commonParam, body, page),
+      body: Object.assign(this._commonParam, body, page),
       expire: this._expire
     })
   }

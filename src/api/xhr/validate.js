@@ -2,8 +2,8 @@ import obey from 'obey'
 
 const model = obey.model({
   code: { type: 'number', required: true },
-  msg: { type: 'string', allowNull: true, empty: true },
   data: { type: 'object', allowNull: true, empty: true },
+  msg: { type: 'string', allowNull: true, empty: true },
   timestamp: { type: 'number', required: true }
 })
 
@@ -11,13 +11,13 @@ const validate = (data) => {
   return new Promise((resolve, reject) => {
     model.validate(data)
     .then(data => {
-      let errnum = parseInt(data.code)
-      if (errnum > 0) {
-        return reject(data)
+      let code = parseInt(data.code)
+      if (code > 0) {
+        // return reject(data)
+        return data
       }
       return resolve(data)
-    })
-    .catch(error => {
+    }).catch(error => {
       console.warn(error)
       return reject({ msg: '数据校验不成功', code: -1 })
     })
