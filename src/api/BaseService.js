@@ -1,7 +1,7 @@
 import xhr from './xhr/fetch'
 import config from './xhr/config'
 class BaseService {
-  constructor ({ paging = false, page = 1, pagesize = 20} = {}) {
+  constructor ({ paging = false, page = 1, pagesize = 20 } = {}) {
     this._isPaging = paging
     this._page = page
     this._use_token = true

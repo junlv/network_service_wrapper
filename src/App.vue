@@ -31,19 +31,20 @@ export default {
     requestNews () {
       let self = this
       // this.$Loading()
-      this.testNewsService.token(false)
+        self.testNewsService.token(false)
         .request({
           
         })
         .then((data) => {
-          // self.$Loading.done()
           console.log(data)
           self.news = data.data.news
         })
         .catch(err => {
           console.log(err.msg)
+          
+        }).finally(
           // self.$Loading.done()
-        })
+        )
     },
   },
   mounted () {
