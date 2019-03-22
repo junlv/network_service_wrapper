@@ -13,8 +13,8 @@ const validate = (data) => {
     .then(data => {
       let code = parseInt(data.code)
       if (code > 0) {
-        // return reject(data)
-        return data
+        return reject(data)
+        // return data
       }
       return resolve(data)
     }).catch(error => {

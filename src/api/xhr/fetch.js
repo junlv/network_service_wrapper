@@ -4,6 +4,7 @@ import reform from './reform'
 import validate from './validate'
 
 const xhr = ({ url, method, body = {} }) => {
+
   return new Promise((resolve, reject) => {
 
     let param_ = body || {}
