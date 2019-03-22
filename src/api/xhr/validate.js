@@ -1,6 +1,6 @@
 import obey from 'obey'
 
-const validateModel = obey.model({
+const model = obey.model({
   code: { type: 'number', required: true },
   msg: { type: 'string', allowNull: true, empty: true },
   data: { type: 'object', allowNull: true, empty: true },
@@ -9,7 +9,7 @@ const validateModel = obey.model({
 
 const validate = (data) => {
   return new Promise((resolve, reject) => {
-    validateModel.validate(data)
+    model.validate(data)
     .then(data => {
       let errnum = parseInt(data.code)
       if (errnum > 0) {
