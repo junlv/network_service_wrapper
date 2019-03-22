@@ -8,8 +8,8 @@ export default class BaseService {
     this._expire = 0
     this._cache = null
     this.commonParam = {
-      client: 1,
-      version: '0.0.0'
+      client: config.client,
+      version: config.version
     }
   }
 

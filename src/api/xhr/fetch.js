@@ -30,12 +30,11 @@ const xhr = ({ url, method, body = {} }) => {
     }).then(function (data) {
       return validate(data)
     }).catch((error) => {
-      // config.errHandler(error)
       reject(error)
     }).then(function (data) {
        resolve(reform(data))
     }).catch((error) => {
-        config.errHandler(error)
+        console.warn(error)
         reject({ msg: '无法访问服务', code: -1 })
     })
   })
