@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-loading.body="isLoading">
     <div id="nav">
       {{ news }}
     </div>
@@ -9,8 +9,8 @@
 
 <script>
 
-// import { mapGetters } from 'vuex'
-import TestNewsService from '@/api/TestNewsService'
+import { mapGetters } from 'vuex'
+import Service from '@/api/post.service.js'
 
 
 export default {
@@ -24,34 +24,24 @@ export default {
     }
   },
   computed: {
-
+    ...mapGetters(['isLoading']),
   },
   methods: {
-   
     requestNews () {
-      let self = this
-      // this.$Loading()
-        self.testNewsService.token(false)
-        .request({
-          
-        })
+        let self = this
+        Service.fetch('secret/secretsmyfollow')
         .then((data) => {
           console.log(data)
           self.news = data.data.news
+        }).catch((err)=>{
+          console.warn(err)
         })
-        .catch(err => {
-          console.log(err.msg)
-          
-        }).finally(
-          // self.$Loading.done()
-        )
     },
   },
   mounted () {
      this.requestNews()
   },
   created () {
-     this.testNewsService = new TestNewsService()
   }
 }
 </script>

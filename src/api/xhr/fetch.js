@@ -1,9 +1,10 @@
 import 'whatwg-fetch'
-import config from './config'
+
 import reform from './reform'
 import validate from './validate'
+import Msg from '../../util/message'
 
-const xhr = ({ url, method, body = {} }) => {
+const xhr = ({ url, method, body = {} ,headers = {} }) => {
 
   return new Promise((resolve, reject) => {
 
@@ -20,10 +21,7 @@ const xhr = ({ url, method, body = {} }) => {
 
     fetch(apiUrl, {
       method: method,
-      headers: {
-        'token': config.token,
-        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-      },
+      headers:headers,
       mode: 'cors',
       body: param_
     }).then(res => {
@@ -36,7 +34,7 @@ const xhr = ({ url, method, body = {} }) => {
        resolve(reform(data))
     }).catch((error) => {
         console.warn(error)
-        reject({ msg: '无法访问服务', code: -1 })
+        reject(Msg.M2002)
     })
   })
 }

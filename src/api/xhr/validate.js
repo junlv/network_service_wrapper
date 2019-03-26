@@ -14,12 +14,11 @@ const validate = (data) => {
       let code = parseInt(data.code)
       if (code > 0) {
         return reject(data)
-        // return data
       }
       return resolve(data)
     }).catch(error => {
       console.warn(error)
-      return reject({ msg: '数据校验不成功', code: -1 })
+      return reject({ msg: '数据校验不成功', code: 2001 })
     })
   })
 }
